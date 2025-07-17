@@ -42,7 +42,6 @@ function calcCords(numberOfPoints: number, radius: number, i: number): {x: numbe
 
 async function createBar(numberOfItems: number, radius: number, index: number, barWidth: number, barLength: number, barContainer: HTMLDivElement) {
     const cords = calcCords(numberOfItems, radius, index);
-    const animationLength = 5;
 
     cords.x -= barLength * 0.5;
     cords.y -= barWidth * -(0.5);
@@ -78,21 +77,27 @@ async function main(numberOfItems: number, radius: number = 20): Promise<void> {
     barContainer.className = `bar-container`;
     box.appendChild(barContainer);
 
-    // the length of each bar
-    const barLength: number = 200;
-
-    // the width of each bar
-    const barWidth: number = 10;
-
     for (let index = 0; index < numberOfItems; index++) {
         createBar(numberOfItems, radius, index, barWidth, barLength, barContainer);
     }
-}   
+}
+
+// the length of each bar, recommended: 200
+const barLength: number = 200;
+
+// the width of each bar, recommended: 10
+const barWidth: number = 10;
+
+// length of the animation to complete one full rotation, recommended: 5
+const animationLength: number = 5;
+
+// the number of bars to display, recommended: 45
+const numberOfBars: number = 45;
+
+// the radius of circle in pixels, recommended: 300
+const radius: number = 300;
 
 main(
-    // number of bars
-    45,
-
-    // radius in pixels
-    300
+    numberOfBars,
+    radius
 );

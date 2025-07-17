@@ -8,19 +8,21 @@ $bar-background-colour: darkslategrey;
 // the radius of the circle
 $form-radius: 15rem;
 
+// the list of css colours that circle at an evenly spaced distance
+$colours: (
+    turquoise,
+    lightgreen,
+    // yellow,
+    // orange,
+);
+
+// the length of the trail on each colour as a absolute percentage
+$length-of-colour: 20;
+
+// the amount of bleed forward on each colour as a absolute percentage, can not be larger than the colour's lengths
+$delay-lead: 4;
+
 @keyframes flashGreen {
-    // the list of css colours that circle at an evenly spaced distance
-    $colours: (
-        turquoise,
-        lightgreen,
-    );
-
-    // the length of the trail on each colour as a absolute percentage
-    $length-of-colour: 22;
-
-    // the amount of bleed forward on each colour as a absolute percentage, can not be larger than the colour's lengths
-    $delay-lead: 4;
-
     @if (list.length($colours) * $length-of-colour > 100) {
         @error 'Length of colour is too long for number of colours in list';
     }
@@ -32,8 +34,6 @@ $form-radius: 15rem;
     @for $index from 1 through list.length($colours) {
         $percent-way-through: math.div($index - 1, list.length($colours)) * 100;
 
-        @debug 'percent way over #{$percent-way-through}';
-        
         #{$percent-way-through + '%'} {
             background-color: $bar-background-colour;
         }
@@ -56,14 +56,14 @@ $form-radius: 15rem;
 }
 
 .box {
-    * {
-        color: black;
-    }
-
     position: relative; 
     width: 100vw;
     height: 100vh;
     overflow: hidden; 
+
+    * {
+        color: black;
+    }
 
     .form {
         @include center-self();
